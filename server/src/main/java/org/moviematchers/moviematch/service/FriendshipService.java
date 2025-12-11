@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.moviematchers.moviematch.entity.MovieFriendship;
 import org.moviematchers.moviematch.repository.FriendshipRepository;
-import org.moviematchers.moviematch.entity.MovieUser;
 
 import java.util.List;
 import java.util.Objects;
@@ -15,18 +14,19 @@ import java.util.Objects;
 public class FriendshipService {
     private final Logger logger = LoggerFactory.getLogger(FriendshipService.class);
     private final FriendshipRepository friendshipRepository;
+
     @Autowired
     public FriendshipService(FriendshipRepository friendshipRepository) {
         this.friendshipRepository = friendshipRepository;
     }
-    //get friendships for a specific user
+
+    // get friendships for a specific user
     public List<MovieFriendship> getFriendshipsForUser(Long id) {
         List<MovieFriendship> findByUser1ID = friendshipRepository.findByUser1IDUserID(id);
         List<MovieFriendship> findByUser2ID = friendshipRepository.findByUser2IDUserID(id);
         findByUser1ID.addAll(findByUser2ID);
         return findByUser1ID;
     }
-
 
     public boolean addFriendship(MovieFriendship friendship) {
         try {
@@ -42,8 +42,7 @@ public class FriendshipService {
                 logger.error("user1_id and user2_id are the same");
                 return false;
             }
-        }
-        catch(Exception e) {
+        } catch (Exception e) {
             return false;
         }
     }
