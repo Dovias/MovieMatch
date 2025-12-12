@@ -35,10 +35,16 @@ public final class User {
   }
 
   public User change(final Username username) {
+    Preconditions.checkNotNull(username, "username cannot be null");
+    Preconditions.checkArgument(!this.username.equals(username), "username cannot be the same");
+
     return new User(this.identifier, username, this.password);
   }
 
   public User change(final EncodedPassword password) {
+    Preconditions.checkNotNull(username, "encoded password cannot be null");
+    Preconditions.checkArgument(!this.password.equals(password), "password cannot be the same");
+
     return new User(this.identifier, this.username, password);
   }
 
