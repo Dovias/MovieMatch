@@ -1,23 +1,18 @@
 package org.moviematchers.moviematch.service;
 
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.moviematchers.moviematch.entity.MovieUser;
 import org.moviematchers.moviematch.repository.UserRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import java.util.ArrayList;
 import java.util.Optional;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -61,6 +56,7 @@ class UserServiceTest {
         MovieUser capturedUser = argumentCaptor.getValue();
         assertThat(capturedUser).isEqualTo(user);
     }
+
     @Test
     void cannotAddUser() {
         // given
@@ -91,6 +87,7 @@ class UserServiceTest {
         verify(userRepository).findById(1L);
         verify(bCryptPasswordEncoder).encode(newPassword);
     }
+
     @Test
     void cannotChangePassword() {
         // given
@@ -101,6 +98,7 @@ class UserServiceTest {
         // then
         assertThat(result).isEqualTo(false);
     }
+
     @Test
     void cannotChangePasswordBecauseOfBadPassword() {
         // given
@@ -117,7 +115,7 @@ class UserServiceTest {
     void canGetLoginUserIDByUsername() {
         // given
         String username = "testname";
-        MovieUser user = new MovieUser(1L,username);
+        MovieUser user = new MovieUser(1L, username);
         when(userRepository.findByUserName(username)).thenReturn(user);
 
         // when
@@ -133,7 +131,7 @@ class UserServiceTest {
         // given
         Long userId = 1L;
         String username = "testname";
-        MovieUser user = new MovieUser(userId,username);
+        MovieUser user = new MovieUser(userId, username);
         when(userRepository.findById(userId)).thenReturn(Optional.of(user));
 
         // when

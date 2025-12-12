@@ -3,6 +3,9 @@ package org.moviematchers.moviematch;
 import org.moviematchers.moviematch.dto.Movie;
 import org.moviematchers.moviematch.dto.MovieFilter;
 import org.moviematchers.moviematch.entity.Invitation;
+import org.moviematchers.moviematch.modern.service.UserService;
+import org.moviematchers.moviematch.modern.value.Password;
+import org.moviematchers.moviematch.modern.value.Username;
 
 import java.util.LinkedHashMap;
 import java.util.List;

@@ -24,6 +24,7 @@ public class UserController {
     public List<MovieUser> getUsers() {
         return userService.getUsers();
     }
+
     @GetMapping("getLoginID")
     public Long getLoginUserID(String username) {
         return userService.getLoginUserID(username);
@@ -43,6 +44,7 @@ public class UserController {
             return new ResponseEntity<>("Failed to register user", HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
     @PutMapping("password")
     public ResponseEntity<String> changePassword(
             @RequestParam Long id,
